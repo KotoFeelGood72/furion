@@ -17,13 +17,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   // Создаем экземпляр axios для домена
   const domain = axios.create({
     baseURL: config.public.DOMAIN,
-    // params: {
-    //   username: config.public.CONSUMER_KEY, // Consumer Key
-    //   password: config.public.CONSUMER_SECRET,
-    // },
     auth: {
-      username: "ck_ea41c3ad9122e5d498e1e0c11b7ddde65acb37d7", // Consumer Key
-      password: "cs_e4d516384889b824f90c0be99a69325c9a0f815e", // Consumer Secret
+      username: config.public.CONSUMER_KEY, // Consumer Key
+      password: config.public.CONSUMER_SECRET, // Consumer Secret
     },
     headers: {
       "Content-Type": "application/json",

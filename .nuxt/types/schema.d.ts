@@ -131,8 +131,6 @@ declare module 'nuxt/schema' {
       cdnURL: string,
    },
 
-   GOOGLE_APPLICATION_CREDENTIALS: string,
-
    nitro: {
       envPrefix: string,
    },

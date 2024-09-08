@@ -72,7 +72,7 @@
           <div class="list-block">
             <BlockUserInfo />
             <BlockDeliveryCalc />
-            <BlockPayment />
+            <!-- <BlockPayment /> -->
           </div>
         </div>
         <div class="cart_totals">
@@ -92,13 +92,14 @@
               </li>
             </ul>
           </div>
-          <DefaultBtn
+          <!-- <DefaultBtn
             name="К оформлению заказа"
             type="primary"
             color="brown"
             size="small"
             @click="createOrder"
-          />
+          /> -->
+          <div id="split"></div>
           <div class="cart_total__privacy">
             Нажимая кнопку 'Оформить заказ', Вы принимаете условия
             соответствующей
@@ -121,23 +122,27 @@ import Qty from "~/components/ui/Qty.vue";
 import BlockUserInfo from "~/components/blocks/BlockUserInfo.vue";
 import BlockDeliveryCalc from "~/components/blocks/BlockDeliveryCalc.vue";
 import BlockPayment from "~/components/blocks/BlockPayment.vue";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import { useCartStoreRefs, useCartStore } from "~/store/useCartStore";
 
+// Получаем данные корзины и текущего заказа
 const { carts, currentOrder } = useCartStoreRefs();
 const { updateCartItem, removeCartItem, createOrder } = useCartStore();
 
 const selectedItems = ref<string[]>([]);
 
+// Вычисляем, есть ли выбранные товары
 const hasSelectedItems = computed(() => {
   return selectedItems.value.length > 0;
 });
 
+// Обновление количества товара в корзине
 const updateQuantity = (item: any, quantity: number) => {
   item.quantity = quantity;
   updateCartItem(item);
 };
 
+// Удаление выбранных товаров из корзины
 const deleteSelectedItems = () => {
   selectedItems.value.forEach((itemId) => {
     removeCartItem(itemId);
@@ -145,6 +150,7 @@ const deleteSelectedItems = () => {
   selectedItems.value = [];
 };
 
+// Обработка выбора товара
 const toggleSelectItem = (itemId: string) => {
   if (selectedItems.value.includes(itemId)) {
     selectedItems.value = selectedItems.value.filter((id) => id !== itemId);
@@ -153,6 +159,7 @@ const toggleSelectItem = (itemId: string) => {
   }
 };
 
+// Выбор всех товаров
 const toggleSelectAll = (event: Event) => {
   if ((event.target as HTMLInputElement).checked) {
     selectedItems.value = carts.value.map((item: any) => item.id);
@@ -161,37 +168,61 @@ const toggleSelectAll = (event: Event) => {
   }
 };
 
+// Проверка, все ли товары выбраны
 const isAllSelected = computed(() => {
   return (
     carts.value.length > 0 && selectedItems.value.length === carts.value.length
   );
 });
 
+// Подсчет общей стоимости корзины
 const totalPrice = computed(() => {
   return carts.value.reduce((total: any, item: any) => {
     return total + item.price * item.quantity;
   }, 0);
 });
 
-// Следим за изменениями в корзине и обновляем currentOrder
-watch(
-  carts,
-  (newCarts) => {
-    currentOrder.value = {
-      ...currentOrder.value,
-      items: newCarts.map((item) => ({
-        id: item.id,
-        name: item.title,
-        quantity: item.quantity,
-        price: item.price,
-        color: item.color,
-        thumbnail: item.thumbnail,
-      })),
-    };
-  },
-  { deep: true }
-);
+const setLineItemsAndPrice = () => {
+  const lineItems = carts.value.map((item) => ({
+    product_id: item.id,
+    name: item.title,
+    quantity: item.quantity,
+    price: item.price,
+    color: item.color,
+    thumbnail: item.thumbnail,
+  }));
+
+  const totalOrderPrice = carts.value.reduce((total: any, item: any) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
+  currentOrder.value = {
+    ...currentOrder.value,
+    line_items: lineItems,
+    price: totalOrderPrice,
+  };
+
+  // Проверяем, определена ли функция updateYaPayPrice
+  if (typeof window.updateYaPayPrice === 'function') {
+    console.log("Updating YaPay price:", totalOrderPrice);
+    window.updateYaPayPrice(totalOrderPrice);
+  } else {
+    console.error("updateYaPayPrice is not defined");
+  }
+};
+
+
+// Следим за изменениями в корзине и обновляем line_items и price
+watch(carts, setLineItemsAndPrice, { deep: true });
+
+// Инициализация line_items и цены при монтировании компонента
+onMounted(() => {
+  setLineItemsAndPrice();
+});
 </script>
+
+
+
 
 <style scoped lang="scss">
 .cart {

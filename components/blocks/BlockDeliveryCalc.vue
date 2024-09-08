@@ -89,25 +89,45 @@ const fetchSuggestions = async () => {
 // Выбор предложения из списка адресов
 const selectSuggestion = (suggestion: any) => {
   query.value = suggestion.value;
-  selectedAddress.value = suggestion.value;
+  selectedAddress.value = JSON.stringify(suggestion.data); // Передаём данные в JSON формате
   suggestions.value = [];
 };
 
-// Обновление currentOrder при изменении выбранного адреса или способа доставки
+
 watch([selectedAddress, selectedMethod], ([newAddress, newMethod]) => {
   const selectedMethodDetails = deliveryMethods.find(
     (method) => method.name === newMethod
   );
 
+  const addressData = JSON.parse(newAddress); // Предполагается, что newAddress содержит JSON объект из DaData
+
+  // Маппинг данных с DaData API на нужные поля WooCommerce
   currentOrder.value = {
     ...currentOrder.value,
-    delivery: {
-      address: newAddress,
+    shipping: {
+      ...currentOrder.value.shipping, // Сохраняем уже существующие данные
+      address_1: `${addressData.street_with_type || ""} ${addressData.house || ""}`,
+      city: addressData.city || "",
+      postcode: addressData.postal_code || "",
+      country: addressData.country_iso_code || "RU",
+      region: addressData.region_with_type || "",
       method: selectedMethodDetails ? selectedMethodDetails.name : "",
       price: selectedMethodDetails ? selectedMethodDetails.price : 0,
     },
+    billing: {
+      ...currentOrder.value.billing, // Сохраняем уже существующие данные
+      address_1: `${addressData.street_with_type || ""} ${addressData.house || ""}`,
+      city: addressData.city || "",
+      postcode: addressData.postal_code || "",
+      country: addressData.country_iso_code || "RU",
+      region: addressData.region_with_type || "",
+    }
   };
 });
+
+
+
+
 </script>
 
 <style scoped lang="scss">

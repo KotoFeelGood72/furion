@@ -112,7 +112,7 @@ const toggleAuthorization = () => {
   }
 };
 
-// Обновление данных заказа при изменении userData
+// Обновление данных заказа при изменении userData и передача в billing и shipping
 watch(
   userData,
   (newUserData) => {
@@ -120,6 +120,18 @@ watch(
       ...currentOrder.value,
       user: {
         name: newUserData.name,
+        phone: newUserData.phone,
+        email: newUserData.email,
+      },
+      billing: {
+        ...currentOrder.value.billing, // Сохраняем уже существующие данные в billing
+        first_name: newUserData.name,
+        phone: newUserData.phone,
+        email: newUserData.email,
+      },
+      shipping: {
+        ...currentOrder.value.shipping, // Сохраняем уже существующие данные в shipping
+        first_name: newUserData.name,
         phone: newUserData.phone,
         email: newUserData.email,
       },
@@ -137,9 +149,24 @@ onMounted(() => {
       phone: userData.value.phone,
       email: userData.value.email,
     },
+    billing: {
+      ...currentOrder.value.billing, // Сохраняем уже существующие данные в billing при монтировании
+      first_name: userData.value.name,
+      phone: userData.value.phone,
+      email: userData.value.email,
+    },
+    shipping: {
+      ...currentOrder.value.shipping, // Сохраняем уже существующие данные в shipping при монтировании
+      first_name: userData.value.name,
+      phone: userData.value.phone,
+      email: userData.value.email,
+    },
   };
 });
 </script>
+
+
+
 
 <style scoped lang="scss">
 .user__toggle {
