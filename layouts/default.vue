@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <template>
   <main class="main">
     <slot name="header"></slot>
@@ -7,15 +5,15 @@
     <div class="content">
       <slot />
     </div>
-    <ModalAuth v-if="modals.auth" />
+    <transition name="modal">
+      <ModalAuth v-if="modals.auth" class="modal-animate" />
+    </transition>
     <slot name="footer"></slot>
   </main>
 </template>
 
 <script setup lang="ts">
 import ModalAuth from "~/components/modal/ModalAuth.vue";
-import Header from "~/components/shared/Header.vue";
-import Footer from "~/components/shared/Footer.vue";
 import { useModalStoreRefs, useModalStore } from "~/store/useModalStore";
 import { useSlots } from "vue";
 
@@ -46,5 +44,29 @@ slots;
   height: 100%;
   background-color: rgba(81, 81, 81, 0.164);
   z-index: 99;
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-enter-from {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.modal-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+Ы .modal-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.modal-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
 }
 </style>

@@ -4,36 +4,32 @@ import { storeToRefs } from "pinia";
 
 export const useUserStore = defineStore("users", {
   state: () => ({
-    user: null as any, // Храним данные пользователя
-    data: null as any, // Дополнительные данные пользователя
+    user: null as any,
+    data: null as any,
   }),
   actions: {
-    // Метод для логина пользователя
     async loginUser(data: any) {
-      this.user = data; // Сохраняем данные пользователя в состоянии
-      // Optionally: await this.fetchUser(); // Можно сразу вызвать fetchUser для получения дополнительных данных
+      this.user = data;
     },
 
-    // Получение данных пользователя
     async fetchUser() {
-      const { $main } = useNuxtApp(); // Используем доступ к основному API через Nuxt
       if (!this.user) {
         throw new Error("Пользователь не авторизован");
       }
       try {
+        const { $main } = useNuxtApp();
         const response = await $main.get(
           `/users/${this.user.user_data.ID}.json`
-        ); // Запрос к файлу JSON с данными пользователя
+        );
         if (response.data) {
-          this.data = response.data; // Сохраняем полученные данные
+          this.data = response.data;
         }
       } catch (error) {
         console.error("Ошибка получения данных пользователя:", error);
-        throw new Error("Токен недействителен. Выполнен выход."); // Обрабатываем ошибку токена
+        throw new Error("Токен недействителен. Выполнен выход.");
       }
     },
 
-    // Метод для выхода пользователя
     async logout() {
       try {
         const response = await axios.post(
@@ -47,16 +43,14 @@ export const useUserStore = defineStore("users", {
       } catch (error) {
         console.error("Ошибка выполнения запроса logout:", error);
       }
-      // Очищаем данные пользователя после выхода
       this.user = null;
-      this.data = null; // Очищаем дополнительные данные пользователя
-      localStorage.removeItem("users"); // Удаляем данные пользователя из localStorage
+      this.data = null;
+      localStorage.removeItem("users");
     },
   },
   persist: {
-    storage: persistedState.localStorage, // Сохраняем данные пользователя в localStorage
+    storage: persistedState.localStorage,
   },
 });
 
-// Хук для получения реактивных данных из Pinia
 export const useUserStoreRefs = () => storeToRefs(useUserStore());

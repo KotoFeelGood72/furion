@@ -20,19 +20,21 @@
           <img v-if="method.logo" :src="method.logo" alt="" />
         </label>
       </div>
+      <div class="split__w" v-if="selectedMethod === 'Оплатить'">
+        <div id="split-widget"></div>
+      </div>
     </div>
-    
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, watch } from "vue";
+<script setup>
+import { ref, watch, onMounted } from "vue";
 import { useCartStoreRefs } from "~/store/useCartStore";
+import { useYaPay } from "~/composables/useYaPay";
 
-// Инициализируем выбранный метод оплаты значением по умолчанию
 const selectedMethod = ref("Оплата картой онлайн или через СБП");
-
-// Массив способов оплаты
+const { currentOrder } = useCartStoreRefs();
+const { createPaymentSession, resetPaymentSession } = useYaPay();
 const paymentMethods = [
   {
     name: "Оплата картой онлайн или через СБП",
@@ -40,23 +42,46 @@ const paymentMethods = [
   { name: "Оплатить", logo: "/img/split.png" },
 ];
 
-// Достаем текущий заказ из стора
-const { currentOrder } = useCartStoreRefs();
+// Обновление сессии оплаты
+const updateYaPaySession = () => {
+  const amount = currentOrder.value.price || 0;
 
-// Следим за изменением способа оплаты и обновляем currentOrder
-watch(selectedMethod, (newMethod) => {
-  currentOrder.value = {
-    ...currentOrder.value,
-    paymentMethod: newMethod, // Добавляем выбранный способ оплаты
-  };
+  // Сбрасываем предыдущую сессию, если она есть
+  resetPaymentSession();
+
+  if (selectedMethod.value === "Оплатить") {
+    // Инициализируем сессию сплит-оплаты
+    createPaymentSession({
+      amount,
+      methods: ["SPLIT"],
+      buttonContainerId: "#payButton", // Кнопка оплаты
+      widgetContainerId: "#split-widget", // Информационный виджет сплита
+    });
+  } else {
+    // Инициализируем обычную оплату
+    createPaymentSession({
+      amount,
+      methods: ["CARD"],
+      buttonContainerId: "#payButton", // Кнопка мгновенной оплаты
+    });
+  }
+};
+
+// Следим за изменением способа оплаты и пересоздаем сессии
+watch(selectedMethod, () => {
+  updateYaPaySession();
 });
 
-// Инициализация currentOrder при монтировании компонента
+// Пересоздание сессии при изменении цены
+watch(
+  () => currentOrder.value.price,
+  () => {
+    updateYaPaySession();
+  }
+);
+
 onMounted(() => {
-  currentOrder.value = {
-    ...currentOrder.value,
-    paymentMethod: selectedMethod.value, // Устанавливаем значение по умолчанию в заказ
-  };
+  updateYaPaySession();
 });
 </script>
 
@@ -128,5 +153,9 @@ onMounted(() => {
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
+}
+
+.split__w {
+  max-width: 50rem;
 }
 </style>

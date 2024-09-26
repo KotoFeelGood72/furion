@@ -148,6 +148,8 @@ declare module 'nuxt/schema' {
 
    CONSUMER_SECRET: string,
 
+   YANDEX_URL: string,
+
    persistedState: {
       storage: string,
 

@@ -13,17 +13,18 @@
     "@nuxt/icon": "^1.4.5",
     "@pinia/nuxt": "^0.5.2",
     "axios": "^1.7.3",
-    "nuxt": "^3.12.4",
     "nuxt-swiper": "^1.2.2",
     "pinia": "^2.2.0",
-    "vue": "latest",
     "vue-3-mask": "^0.0.1-alpha",
     "vue-dadata-suggestions": "^0.6.3",
     "vue-toastification": "^2.0.0-rc.5",
+    "nuxt": "^3.12.4",
+    "vue": "latest",
     "vue3-otp-input": "^0.5.21"
   },
   "devDependencies": {
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
+    "nuxt-yandex-pay": "^0.0.2",
     "sass": "^1.77.8"
   }
 }

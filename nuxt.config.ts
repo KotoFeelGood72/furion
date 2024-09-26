@@ -23,31 +23,42 @@ export default defineNuxtConfig({
     "@pinia-plugin-persistedstate/nuxt",
   ],
 
-  plugins: ["~/plugins/yandex-pay.client.js"],
-
   app: {
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
-      
+
       script: [
         {
           src: "https://pay.yandex.ru/sdk/v1/pay.js",
           async: true,
-          // defer: true,
-          // onload: "onYaPayLoad()"  // Вызываем функцию при загрузке скрипта
-        }
+        },
       ],
       csp: {
-        reportOnly: true,
-        hashAlgorithm: 'sha256',
+        reportOnly: false,
+        // hashAlgorithm: "sha256",
         policies: {
-          'default-src': ["'self'"],
-          'script-src': ["'self'", 'https://mc.yandex.ru', 'https://yastatic.net', 'https://pay.yandex.ru'],
-          'connect-src': ["'self'", 'https://mc.yandex.ru', 'https://mc.yandex.com', 'https://pay.yandex.ru'],
-          'frame-src': ["'self'", 'https://pay.yandex.ru', 'https://mc.yandex.ru', 'https://mc.yandex.com'],
-          'img-src': ["'self'", 'data:', 'https://mc.yandex.ru'],
-        }
+          "default-src": ["'self'"],
+          "script-src": [
+            "'self'",
+            "https://mc.yandex.ru",
+            "https://yastatic.net",
+            "https://pay.yandex.ru",
+          ],
+          "connect-src": [
+            "'self'",
+            "https://mc.yandex.ru",
+            "https://mc.yandex.com",
+            "https://pay.yandex.ru",
+          ],
+          "frame-src": [
+            "'self'",
+            "https://pay.yandex.ru",
+            "https://mc.yandex.ru",
+            "https://mc.yandex.com",
+          ],
+          "img-src": ["'self'", "data:", "https://mc.yandex.ru"],
+        },
       },
     },
     pageTransition: { name: "page", mode: "out-in" },
@@ -81,8 +92,8 @@ export default defineNuxtConfig({
       BASE_URL: process.env.BASE_URL,
       CONSUMER_KEY: process.env.CONSUMER_KEY,
       CONSUMER_SECRET: process.env.CONSUMER_SECRET,
+      YANDEX_URL: process.env.YANDEX_URL,
     },
-
   },
 
   nitro: {

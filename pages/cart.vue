@@ -72,7 +72,7 @@
           <div class="list-block">
             <BlockUserInfo />
             <BlockDeliveryCalc />
-            <!-- <BlockPayment /> -->
+            <BlockPayment />
           </div>
         </div>
         <div class="cart_totals">
@@ -88,18 +88,11 @@
               </li>
               <li>
                 <span>Доставка</span>
-                <p>520</p>
+                <p>{{ deliveryPrice }}</p>
               </li>
             </ul>
           </div>
-          <!-- <DefaultBtn
-            name="К оформлению заказа"
-            type="primary"
-            color="brown"
-            size="small"
-            @click="createOrder"
-          /> -->
-          <div id="split"></div>
+          <div id="payButton"></div>
           <div class="cart_total__privacy">
             Нажимая кнопку 'Оформить заказ', Вы принимаете условия
             соответствующей
@@ -117,17 +110,19 @@
 </template>
 
 <script setup lang="ts">
-import DefaultBtn from "~/components/ui/DefaultBtn.vue";
+// import DefaultBtn from "~/components/ui/DefaultBtn.vue";
 import Qty from "~/components/ui/Qty.vue";
 import BlockUserInfo from "~/components/blocks/BlockUserInfo.vue";
 import BlockDeliveryCalc from "~/components/blocks/BlockDeliveryCalc.vue";
 import BlockPayment from "~/components/blocks/BlockPayment.vue";
 import { ref, computed, watch, onMounted } from "vue";
 import { useCartStoreRefs, useCartStore } from "~/store/useCartStore";
+import { useDelivery } from "~/composables/useDelivery";
 
 // Получаем данные корзины и текущего заказа
 const { carts, currentOrder } = useCartStoreRefs();
 const { updateCartItem, removeCartItem, createOrder } = useCartStore();
+const { deliveryPrice } = useDelivery();
 
 const selectedItems = ref<string[]>([]);
 
@@ -183,7 +178,7 @@ const totalPrice = computed(() => {
 });
 
 const setLineItemsAndPrice = () => {
-  const lineItems = carts.value.map((item) => ({
+  const lineItems = carts.value.map((item: any) => ({
     product_id: item.id,
     name: item.title,
     quantity: item.quantity,
@@ -202,15 +197,14 @@ const setLineItemsAndPrice = () => {
     price: totalOrderPrice,
   };
 
-  // Проверяем, определена ли функция updateYaPayPrice
-  if (typeof window.updateYaPayPrice === 'function') {
-    console.log("Updating YaPay price:", totalOrderPrice);
-    window.updateYaPayPrice(totalOrderPrice);
-  } else {
-    console.error("updateYaPayPrice is not defined");
-  }
+  // // Проверяем, определена ли функция updateYaPayPrice
+  // if (typeof window.updateYaPayPrice === "function") {
+  //   console.log("Updating YaPay price:", totalOrderPrice);
+  //   window.updateYaPayPrice(totalOrderPrice);
+  // } else {
+  //   console.error("updateYaPayPrice is not defined");
+  // }
 };
-
 
 // Следим за изменениями в корзине и обновляем line_items и price
 watch(carts, setLineItemsAndPrice, { deep: true });
@@ -220,9 +214,6 @@ onMounted(() => {
   setLineItemsAndPrice();
 });
 </script>
-
-
-
 
 <style scoped lang="scss">
 .cart {

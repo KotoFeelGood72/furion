@@ -19,115 +19,50 @@
         </li>
       </ul>
     </div>
-    <div class="delivery__method">
-      <p>Способ доставки</p>
-      <div
-        v-for="method in deliveryMethods"
-        :key="method.name"
-        class="delivery__method-item"
-      >
-        <input
-          type="radio"
-          :id="method.name"
-          v-model="selectedMethod"
-          :value="method.name"
-        />
-        <label :for="method.name">
-          <img :src="method.logo" alt="" />
-          <span>{{ method.name }}</span> <strong>{{ method.price }} ₽</strong>
-        </label>
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import axios from "axios";
+import { useDelivery } from "~/composables/useDelivery";
 import { useCartStoreRefs } from "~/store/useCartStore";
 
-const query = ref("");
-const suggestions = ref<any>([]);
-const selectedAddress = ref("");
-const selectedMethod = ref("");
-
-// Доступ к текущему заказу из стора
+const {
+  query,
+  suggestions,
+  deliveryPrice,
+  fetchSuggestions,
+  selectSuggestion,
+  selectedAddress,
+} = useDelivery();
 const { currentOrder } = useCartStoreRefs();
 
-// Способы доставки
-const deliveryMethods = [
-  { name: "Курьерская служба EMS", price: 520, logo: "/img/ems-logo.png" },
-  { name: "Яндекс доставка", price: 1020, logo: "/img/yandex-logo.png" },
-];
-
-// Функция для получения предложений по адресу через DaData API
-const fetchSuggestions = async () => {
-  if (query.value.length > 1) {
-    try {
-      const response = await axios.post(
-        "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address",
-        {
-          query: query.value,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Token cab538d49b7cbc9ae1d154721028bbbbb0130b57`,
-          },
-        }
-      );
-      suggestions.value = response.data.suggestions;
-    } catch (error) {
-      console.error("Error fetching suggestions:", error);
-    }
-  } else {
-    suggestions.value = [];
-  }
-};
-
-// Выбор предложения из списка адресов
-const selectSuggestion = (suggestion: any) => {
-  query.value = suggestion.value;
-  selectedAddress.value = JSON.stringify(suggestion.data); // Передаём данные в JSON формате
-  suggestions.value = [];
-};
-
-
-watch([selectedAddress, selectedMethod], ([newAddress, newMethod]) => {
-  const selectedMethodDetails = deliveryMethods.find(
-    (method) => method.name === newMethod
-  );
-
-  const addressData = JSON.parse(newAddress); // Предполагается, что newAddress содержит JSON объект из DaData
-
-  // Маппинг данных с DaData API на нужные поля WooCommerce
+watch([selectedAddress], (newAddress) => {
+  const addressData = JSON.parse(newAddress);
   currentOrder.value = {
     ...currentOrder.value,
     shipping: {
-      ...currentOrder.value.shipping, // Сохраняем уже существующие данные
-      address_1: `${addressData.street_with_type || ""} ${addressData.house || ""}`,
+      ...currentOrder.value.shipping,
+      address_1: `${addressData.street_with_type || ""} ${
+        addressData.house || ""
+      }`,
       city: addressData.city || "",
       postcode: addressData.postal_code || "",
       country: addressData.country_iso_code || "RU",
       region: addressData.region_with_type || "",
-      method: selectedMethodDetails ? selectedMethodDetails.name : "",
-      price: selectedMethodDetails ? selectedMethodDetails.price : 0,
+      price: deliveryPrice.value,
     },
     billing: {
-      ...currentOrder.value.billing, // Сохраняем уже существующие данные
-      address_1: `${addressData.street_with_type || ""} ${addressData.house || ""}`,
+      ...currentOrder.value.billing,
+      address_1: `${addressData.street_with_type || ""} ${
+        addressData.house || ""
+      }`,
       city: addressData.city || "",
       postcode: addressData.postal_code || "",
       country: addressData.country_iso_code || "RU",
       region: addressData.region_with_type || "",
-    }
+    },
   };
 });
-
-
-
-
 </script>
 
 <style scoped lang="scss">
