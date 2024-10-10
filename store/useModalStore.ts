@@ -1,13 +1,15 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
 interface ModalsState {
   auth: boolean;
+  callback: boolean;
 }
 
-export const useModalStore = defineStore('modal', {
+export const useModalStore = defineStore("modal", {
   state: (): { modals: ModalsState } => ({
     modals: {
-        auth: false,
+      auth: false,
+      callback: false,
     },
   }),
   actions: {
@@ -17,8 +19,12 @@ export const useModalStore = defineStore('modal', {
     closeModal(modalName: keyof ModalsState): void {
       this.modals[modalName] = false;
     },
+    closeAllModals() {
+      Object.keys(this.modals).forEach((modalName) => {
+        this.modals[modalName as keyof ModalsState] = false;
+      });
+    },
   },
 });
-
 
 export const useModalStoreRefs = () => storeToRefs(useModalStore());

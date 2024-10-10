@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <template>
   <div class="rent" v-if="page">
     <PageHead :data="head" page="rent" />

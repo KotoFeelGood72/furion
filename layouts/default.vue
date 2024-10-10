@@ -1,51 +1,71 @@
 <template>
   <main class="main">
-    <slot name="header"></slot>
-    <div class="page-bg" v-if="modals.auth" @click="closeModal('auth')"></div>
+    <Header />
     <div class="content">
       <slot />
     </div>
     <transition name="modal">
       <ModalAuth v-if="modals.auth" class="modal-animate" />
     </transition>
-    <slot name="footer"></slot>
+    <transition name="modal">
+      <ModalCallback v-if="modals.callback" class="modal-animate" />
+    </transition>
+    <transition name="fade-bg">
+      <div v-if="isModalActive" class="page-bg" @click="closeAllModals"></div>
+    </transition>
+    <Preloader />
+    <Footer />
   </main>
 </template>
 
 <script setup lang="ts">
 import ModalAuth from "~/components/modal/ModalAuth.vue";
+import ModalCallback from "~/components/modal/ModalCallback.vue";
 import { useModalStoreRefs, useModalStore } from "~/store/useModalStore";
-import { useSlots } from "vue";
+import Header from "~/components/shared/Header.vue";
+import Footer from "~/components/shared/Footer.vue";
+import { useProductsStore } from "@/store/useProductsStore";
+import { useUserStore } from "@/store/useUserStore";
+import Preloader from "~/components/shared/Preloader.vue";
 
+const route = useRoute();
+const { closeAllModals } = useModalStore();
 const { modals } = useModalStoreRefs();
-const { closeModal } = useModalStore();
+const { getAllProducts } = useProductsStore();
+const { fetchUser } = useUserStore();
 
-const slots = useSlots();
+const isModalActive = computed(() => {
+  return Object.values(modals.value).some((isActive) => isActive);
+});
 
-slots;
+watch(
+  () => route.fullPath,
+  () => {
+    closeAllModals();
+  }
+);
+
+onMounted(async () => {
+  await getAllProducts();
+  await fetchUser();
+
+  // Убираем прелоадер через 1.5 секунды после загрузки
+  // setTimeout(() => {
+  //   isLoading.value = false;
+  // }, 1500);
+});
 </script>
 
 <style lang="scss">
-.layout-enter-active,
-.layout-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.layout-enter,
-.layout-leave-to {
-  opacity: 0;
-}
-
 .page-bg {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(81, 81, 81, 0.164);
-  z-index: 99;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
 }
-
 .modal-enter-active,
 .modal-leave-active {
   transition: all 0.3s ease;

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ["~/assets/scss/style.scss"],
 
   vite: {
@@ -34,34 +34,35 @@ export default defineNuxtConfig({
           async: true,
         },
       ],
-      csp: {
-        reportOnly: false,
-        // hashAlgorithm: "sha256",
-        policies: {
-          "default-src": ["'self'"],
-          "script-src": [
-            "'self'",
-            "https://mc.yandex.ru",
-            "https://yastatic.net",
-            "https://pay.yandex.ru",
-          ],
-          "connect-src": [
-            "'self'",
-            "https://mc.yandex.ru",
-            "https://mc.yandex.com",
-            "https://pay.yandex.ru",
-          ],
-          "frame-src": [
-            "'self'",
-            "https://pay.yandex.ru",
-            "https://mc.yandex.ru",
-            "https://mc.yandex.com",
-          ],
-          "img-src": ["'self'", "data:", "https://mc.yandex.ru"],
-        },
-      },
+      // csp: {
+      //   reportOnly: false,
+      //   // hashAlgorithm: "sha256",
+      //   policies: {
+      //     "default-src": ["'self'"],
+      //     "script-src": [
+      //       "'self'",
+      //       "https://mc.yandex.ru",
+      //       "https://yastatic.net",
+      //       "https://pay.yandex.ru",
+      //     ],
+      //     "connect-src": [
+      //       "'self'",
+      //       "https://mc.yandex.ru",
+      //       "https://mc.yandex.com",
+      //       "https://pay.yandex.ru",
+      //     ],
+      //     "frame-src": [
+      //       "'self'",
+      //       "https://pay.yandex.ru",
+      //       "https://mc.yandex.ru",
+      //       "https://mc.yandex.com",
+      //     ],
+      //     "img-src": ["'self'", "data:", "https://mc.yandex.ru"],
+      //   },
+      // },
     },
     pageTransition: { name: "page", mode: "out-in" },
+    layoutTransition: { name: "layout", mode: "out-in" },
   },
 
   swiper: {
@@ -95,6 +96,9 @@ export default defineNuxtConfig({
       YANDEX_URL: process.env.YANDEX_URL,
     },
   },
+  // router: {
+  //   middleware: ["loading"], // Добавь здесь middleware
+  // },
 
   nitro: {
     devProxy: {

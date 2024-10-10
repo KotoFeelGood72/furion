@@ -23,7 +23,7 @@
 const props = defineProps<{
   colors: string[];
   id: number;
-  modelValue: string;
+  modelValue?: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);

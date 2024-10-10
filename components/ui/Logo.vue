@@ -23,6 +23,7 @@ withDefaults(
 .logo {
   @include flex-center;
   max-height: 3rem;
+  transition: all 0.3s ease-in-out;
   a {
     width: 100%;
     height: 100%;

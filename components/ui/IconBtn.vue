@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from "vue";
+
 const props = withDefaults(
   defineProps<{
     icon?: string;
@@ -22,5 +23,9 @@ const props = withDefaults(
 .icon-btn {
   @include flex-center;
   cursor: pointer;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -1,6 +1,10 @@
 <template>
   <div class="phone_input">
-    <MaskInput v-model="localValue" mask="# (###)-###-####" :placeholder="placeholder" />
+    <MaskInput
+      v-model="localValue"
+      mask="# (###)-###-####"
+      :placeholder="placeholder"
+    />
   </div>
 </template>
 
@@ -28,10 +32,10 @@ const localValue = computed({
     @include app;
     background-color: $white;
     padding: 2rem;
-    border: 0.1rem solid $gray;
+    border: 0.1rem solid #b2b2b2;
     color: $gray;
     width: 100%;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     height: 6.1rem;
     &::-webkit-input-placeholder {
       color: $gray;

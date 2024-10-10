@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <template>
   <div class="offerta">
     <div class="container">

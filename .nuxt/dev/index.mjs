@@ -818,26 +818,9 @@ function getRouteRulesForPath(path) {
   return defu({}, ..._routeRulesMatcher.matchAll(path).reverse());
 }
 
-const script = `
-if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
-  Object.defineProperty(window, '__NUXT_DEVTOOLS_TIME_METRIC__', {
-    value: {},
-    enumerable: false,
-    configurable: true,
-  })
-}
-window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
-`;
-
-const _hNcCLkE2CD = (function(nitro) {
-  nitro.hooks.hook("render:html", (htmlContext) => {
-    htmlContext.head.push(`<script>${script}<\/script>`);
-  });
-});
-
 const rootDir = "C:/Users/studi/Desktop/furion";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[{"src":"https://pay.yandex.ru/sdk/v1/pay.js","async":true}],"noscript":[],"charset":"utf-8","viewport":"width=device-width, initial-scale=1","csp":{"reportOnly":false,"policies":{"default-src":["'self'"],"script-src":["'self'","https://mc.yandex.ru","https://yastatic.net","https://pay.yandex.ru"],"connect-src":["'self'","https://mc.yandex.ru","https://mc.yandex.com","https://pay.yandex.ru"],"frame-src":["'self'","https://pay.yandex.ru","https://mc.yandex.ru","https://mc.yandex.com"],"img-src":["'self'","data:","https://mc.yandex.ru"]}}};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[{"src":"https://pay.yandex.ru/sdk/v1/pay.js","async":true}],"noscript":[],"charset":"utf-8","viewport":"width=device-width, initial-scale=1"};
 
 const appRootTag = "div";
 
@@ -924,8 +907,7 @@ function onConsoleLog(callback) {
 }
 
 const plugins = [
-  _hNcCLkE2CD,
-_RwJZAdKcg8
+  _RwJZAdKcg8
 ];
 
 const scheduledTasks = false;

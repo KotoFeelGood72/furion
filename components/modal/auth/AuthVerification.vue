@@ -34,7 +34,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import Vue3OtpInput from "vue3-otp-input";
 
 const props = defineProps<{
-  modelValue: string;
+  modelValue?: string;
   error: string;
 }>();
 

@@ -13,7 +13,10 @@ import ActionBlock from "~/components/blocks/ActionBlock.vue";
 import RecomendedBlock from "~/components/blocks/RecomendedBlock.vue";
 import HeroSlider from "~/components/blocks/HeroSlider.vue";
 import { useProductsStoreRefs } from "~/store/useProductsStore";
-const home = ref<any>(null);
+import { useHomeStore, useHomeStoreRefs } from "~/store/useHomeStore";
+
+const { getHome } = useHomeStore();
+const { home } = useHomeStoreRefs();
 const { products } = useProductsStoreRefs();
 
 const featuredProducts = computed(() => {
@@ -24,18 +27,8 @@ const featuredProducts = computed(() => {
   }
 });
 
-async function fetchHome() {
-  try {
-    const { $main } = useNuxtApp();
-    const response = await $main.get("/home.json");
-    home.value = response.data.acf;
-  } catch (error) {
-  } finally {
-  }
-}
-
 onMounted(async () => {
-  await fetchHome();
+  await getHome();
 });
 </script>
 

@@ -1,35 +1,12 @@
 <template>
   <div class="main">
     <NuxtLayout>
-      <template #header>
-        <transition name="fade">
-          <Header />
-        </transition>
-      </template>
       <NuxtPage />
-      <template #footer>
-        <transition name="fade">
-          <Footer />
-        </transition>
-      </template>
     </NuxtLayout>
   </div>
 </template>
 
-<script lang="ts" setup>
-import Header from "./components/shared/Header.vue";
-import Footer from "./components/shared/Footer.vue";
-import { useProductsStore } from "./store/useProductsStore";
-import { useUserStore } from "./store/useUserStore";
-
-const { getAllProducts } = useProductsStore();
-const { fetchUser } = useUserStore();
-
-onMounted(async () => {
-  await getAllProducts();
-  await fetchUser();
-});
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss">
 .fixed {
@@ -96,20 +73,18 @@ a {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 .page-enter-from,
 .page-leave-to {
   opacity: 0;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.check {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
 }
 </style>
