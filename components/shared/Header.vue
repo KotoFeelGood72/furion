@@ -155,6 +155,8 @@ onUnmounted(() => {
 .header__action {
   gap: 2.4rem;
   min-width: 7.8rem;
+  position: relative;
+  z-index: 11;
 }
 .header_col__left {
   align-items: flex-end;

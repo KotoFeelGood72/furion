@@ -18,7 +18,10 @@ const nav = ref<any>([
 .nav {
   @include flex-center;
   gap: 6rem;
+  pointer-events: none;
+  z-index: -1;
   a {
+    pointer-events: all;
     font-size: 1.8rem;
     &.router-link-exact-active {
       color: $brown;
