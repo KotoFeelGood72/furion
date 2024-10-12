@@ -36,6 +36,9 @@ withDefaults(
   @include flex-center;
   &.logo {
     width: 22.5rem;
+    @include bp($point_2) {
+      width: 100%;
+    }
     img {
       width: 100%;
       height: 100%;

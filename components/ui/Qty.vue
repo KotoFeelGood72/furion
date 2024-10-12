@@ -59,6 +59,11 @@ watch(
   max-width: 13.7rem;
   gap: 1rem;
 
+  @include bp($point_2) {
+    max-width: 11.7rem;
+    gap: 0.5rem;
+  }
+
   button {
     min-width: 3.2rem;
     width: 3.2rem;

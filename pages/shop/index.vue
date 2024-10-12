@@ -26,18 +26,36 @@ const { products } = useProductsStoreRefs();
 <style scoped lang="scss">
 .products_list {
   li {
+    @include bp($point_2) {
+      margin-bottom: 3rem;
+    }
     &:not(:last-child) {
       margin-bottom: 10rem;
+      @include bp($point_2) {
+        margin-bottom: 6rem;
+      }
     }
 
     &:nth-child(even) {
       :deep(.products_slider) {
-        order: 1;
+        @include bp($point_2, $direction: min) {
+          order: 1;
+        }
       }
 
       :deep(.products_content) {
-        order: 0;
+        @include bp($point_2, $direction: min) {
+          order: 0;
+        }
       }
+    }
+  }
+}
+
+.shop {
+  .container {
+    @include bp($point_2) {
+      padding: 0;
     }
   }
 }

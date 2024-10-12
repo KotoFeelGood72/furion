@@ -51,6 +51,13 @@ const isCenter = computed(() => props.center);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
+  @include bp($point_2) {
+    padding: 1.5rem 2rem;
+    font-size: 1.6rem;
+    width: 100%;
+    justify-content: center;
+  }
+
   &.active {
     background-color: $light;
     color: $brown;

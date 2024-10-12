@@ -166,6 +166,7 @@ declare global {
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']
   const useSwiper: typeof import('../../node_modules/swiper/vue')['useSwiper']
   const useSwiperSlide: typeof import('../../node_modules/swiper/vue')['useSwiperSlide']
+  const useTelegramBot: typeof import('../../composables/useTelegramBot')['useTelegramBot']
   const useTemplateRef: typeof import('../../node_modules/vue')['useTemplateRef']
   const useTransitionState: typeof import('../../node_modules/vue')['useTransitionState']
   const useYaPay: typeof import('../../composables/useYaPay')['useYaPay']
@@ -355,6 +356,7 @@ declare module 'vue' {
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
     readonly useSwiper: UnwrapRef<typeof import('../../node_modules/swiper/vue')['useSwiper']>
     readonly useSwiperSlide: UnwrapRef<typeof import('../../node_modules/swiper/vue')['useSwiperSlide']>
+    readonly useTelegramBot: UnwrapRef<typeof import('../../composables/useTelegramBot')['useTelegramBot']>
     readonly useTemplateRef: UnwrapRef<typeof import('../../node_modules/vue')['useTemplateRef']>
     readonly useTransitionState: UnwrapRef<typeof import('../../node_modules/vue')['useTransitionState']>
     readonly useYaPay: UnwrapRef<typeof import('../../composables/useYaPay')['useYaPay']>

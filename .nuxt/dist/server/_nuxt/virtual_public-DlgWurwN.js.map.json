@@ -1,0 +1,1 @@
+{"file":"virtual_public-DlgWurwN.js","mappings":";AAAuD,MAAe,aAAA,gBAAgB,kBAAkB;","names":[],"sources":["../../../../virtual:public?%2Fimg%2Fofferta.png"],"sourcesContent":["import { publicAssetsURL } from '#internal/nuxt/paths';export default publicAssetsURL(\"/img/offerta.png\")"],"version":3}

@@ -89,12 +89,18 @@ onMounted(() => {
 .payment {
   background-color: $white;
   padding: 1.7rem 2.4rem 3.4rem 2.4rem;
+  @include bp($point_2) {
+    padding: 1.5rem;
+  }
 
   h3 {
     font-size: 3rem;
     margin-bottom: 3rem;
     font-family: $font_2;
     font-weight: 500;
+    @include bp($point_2) {
+      font-size: 2.4rem;
+    }
   }
 }
 
@@ -129,6 +135,10 @@ onMounted(() => {
       border-radius: 100%;
       content: "";
       transform: translateY(-50%);
+      @include bp($point_2) {
+        transform: translateY(0);
+        top: 0.2rem;
+      }
     }
     &:after {
       position: absolute;
@@ -144,6 +154,10 @@ onMounted(() => {
       background-position: center center;
       background-color: $brown;
       border-radius: 100%;
+      @include bp($point_2) {
+        top: 0.5rem;
+        transform: translateY(0);
+      }
     }
   }
 

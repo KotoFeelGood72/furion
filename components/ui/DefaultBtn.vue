@@ -1,5 +1,3 @@
-<!-- @format -->
-
 <template>
   <div class="button" :class="['button', isColorSheme, isType, isSize]">
     <div class="btn-icon" v-if="icon">
@@ -41,6 +39,9 @@ const isSize = computed(() => props.size);
   overflow: hidden;
   @include flex-center;
   gap: 1rem;
+  @include bp($point_2) {
+    width: 100%;
+  }
 
   .btn-icon {
     font-size: 2.6rem;
@@ -75,6 +76,10 @@ const isSize = computed(() => props.size);
     max-height: 6.9rem;
     font-size: 2.4rem;
     border-width: 0.2rem !important;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+      padding: 1.8rem 3rem;
+    }
   }
   &.secondary {
     border: 0.1rem solid;

@@ -165,9 +165,6 @@ onMounted(() => {
 });
 </script>
 
-
-
-
 <style scoped lang="scss">
 .user__toggle {
   @include flex-start;
@@ -226,10 +223,17 @@ input:checked + .slider:before {
     font-family: $font_2;
     margin-bottom: 2.5rem;
     font-weight: 500;
+
+    @include bp($point_2) {
+      font-size: 2.4rem;
+    }
   }
   p {
     font-size: 1.8rem;
     margin-bottom: 3.5rem;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+    }
   }
 }
 
@@ -250,6 +254,9 @@ input:checked + .slider:before {
   p {
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+    }
   }
 
   &:deep(.phone_input) {
@@ -263,10 +270,17 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  @include bp($point_2) {
+    gap: 1.5rem;
+  }
   p {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+      gap: 1rem;
+    }
   }
 }
 </style>

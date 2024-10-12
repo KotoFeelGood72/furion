@@ -2,6 +2,9 @@
   <header class="header" :class="{ gray: isHome, scrolled: isScrolled }">
     <div class="container">
       <div class="header_top">
+        <div class="burger">
+          <Icon name="iconamoon:menu-burger-horizontal-thin" :size="35" />
+        </div>
         <div class="header_col__left">
           <div class="header_phone">
             <a target="_blank" href="tel:+78002222659">+7 (800) 222 26 59 </a>
@@ -98,15 +101,18 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .header {
   padding-bottom: 4rem;
-  // background-color: $light;
   position: fixed;
-  // position: absolute;
   top: 0;
   left: 0;
   z-index: 99;
   height: $header;
   width: 100%;
   transition: all 0.3s ease-in-out;
+
+  @include bp($point_2) {
+    height: 7rem;
+    padding: 0;
+  }
 
   &.gray {
     background-color: $light;
@@ -117,22 +123,37 @@ onUnmounted(() => {
     background-color: #f0f1f59c;
     backdrop-filter: blur(1rem);
     border-bottom: 0.1rem solid #f0f1f59c;
+    @include bp($point_2) {
+      height: 7rem;
+      padding: 0;
+    }
     :deep(.logo) {
-      transform: translateY(-300%);
+      @include bp($point_2, $direction: min) {
+        transform: translateY(-300%);
+      }
     }
     .header_bottom {
-      transform: translateY(-320%);
+      @include bp($point_2, $direction: min) {
+        transform: translateY(-320%);
+      }
     }
   }
 }
 
 .header_bottom {
   transition: all 0.3s ease-in-out;
+  @include bp($point_2) {
+    display: none;
+  }
 }
 .header_top {
   @include flex-space;
   padding: 3.4rem 0 4.6rem 0;
   position: relative;
+
+  @include bp($point_2) {
+    padding: 2rem 0;
+  }
 }
 
 .header_center {
@@ -140,6 +161,10 @@ onUnmounted(() => {
   left: 49.2%;
   top: 46.3%;
   transform: translate(-50%, -50%);
+  @include bp($point_2) {
+    position: static;
+    transform: none;
+  }
 }
 
 .header_col__left,
@@ -151,15 +176,27 @@ onUnmounted(() => {
 
 .header_col__right {
   gap: 3.5rem;
+  :deep(.button) {
+    @include bp($point_2) {
+      display: none;
+    }
+  }
 }
 .header__action {
   gap: 2.4rem;
   min-width: 7.8rem;
   position: relative;
   z-index: 11;
+  @include bp($point_2) {
+    min-width: auto;
+  }
 }
 .header_col__left {
   align-items: flex-end;
+
+  @include bp($point_2) {
+    display: none;
+  }
 }
 .header_phone {
   font-size: 1.8rem;
@@ -174,6 +211,9 @@ onUnmounted(() => {
   font-family: $font_3;
   color: $brown;
   cursor: pointer;
+  @include bp($point_2) {
+    display: none;
+  }
 }
 
 .header_carts {
@@ -193,5 +233,13 @@ onUnmounted(() => {
   position: absolute;
   top: -0.5rem;
   right: -0.8rem;
+}
+
+.burger {
+  @include flex-center;
+  color: $brown;
+  @include bp($point_2, $direction: min) {
+    display: none;
+  }
 }
 </style>

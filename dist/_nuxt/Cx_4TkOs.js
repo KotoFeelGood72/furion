@@ -1,0 +1,1 @@
+import{e as t}from"./BOzVj4_F.js";import{d as o,R as n,B as _,V as s}from"./BShxNmUg.js";const a={class:"edit"},i=o({__name:"edit",setup(c){return(r,m)=>{const e=t;return n(),_("div",a,[s(e)])}}});export{i as default};

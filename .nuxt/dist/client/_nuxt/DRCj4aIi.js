@@ -1,0 +1,1 @@
+import{c as o,_ as s}from"./BOzVj4_F.js";import{d as a,c as e}from"./BShxNmUg.js";const t=a({__name:"phone",setup(r){return e(""),e(!1),e(!1),o(),(_,n)=>null}}),f=s(t,[["__scopeId","data-v-3c669a2b"]]);export{f as default};

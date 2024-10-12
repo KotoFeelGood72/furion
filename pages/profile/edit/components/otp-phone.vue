@@ -1,5 +1,5 @@
 <template>
-  <div class="code__form">
+  <!-- <div class="code__form">
     <div class="code_form__title">Введите код</div>
     <div class="code__inputs">
       <Vue3OtpInput
@@ -16,7 +16,7 @@
     <span @click="resendCode" :class="{ disabled: timer > 0 }">
       Отправить код повторно {{ formattedTime }}
     </span>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">

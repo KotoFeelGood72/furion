@@ -1,5 +1,5 @@
 <template>
-  <div class="edit">
+  <!-- <div class="edit">
     <div class="edit_form">
       <div class="close">
         <Icon name="simple-line-icons:close" size="30" />
@@ -11,11 +11,11 @@
       <div class="edit_form">
         <div class="edit_input">
           <p>Имя</p>
-          <!-- <Inputs placeholder="Поддубная Елена" v-model="user.name" /> -->
+          <Inputs placeholder="Поддубная Елена" v-model="user.name" />
         </div>
         <div class="edit_input">
           <p>E-mail</p>
-          <!-- <Inputs placeholder="elrnadub@gmail.com" v-model="user.email" /> -->
+          <Inputs placeholder="elrnadub@gmail.com" v-model="user.email" />
         </div>
         <div class="edit_btn">
           <DefaultBtn
@@ -28,7 +28,7 @@
         <div class="edit__delete">Удалить профиль</div>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">

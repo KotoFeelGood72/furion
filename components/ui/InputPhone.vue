@@ -1,15 +1,14 @@
 <template>
   <div class="phone_input">
-    <MaskInput
+    <input
       v-model="localValue"
-      mask="# (###)-###-####"
+      v-mask="'# (###) ###-##-##'"
       :placeholder="placeholder"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { MaskInput } from "vue-3-mask";
 import { computed, defineEmits, defineProps } from "vue";
 
 const props = defineProps<{
@@ -29,7 +28,6 @@ const localValue = computed({
 .phone_input {
   width: 100%;
   input {
-    @include app;
     background-color: $white;
     padding: 2rem;
     border: 0.1rem solid #b2b2b2;

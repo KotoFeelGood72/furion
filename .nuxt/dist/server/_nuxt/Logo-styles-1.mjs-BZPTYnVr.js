@@ -1,0 +1,5 @@
+const Logo_vue_vue_type_style_index_0_scoped_e73623d9_lang = ".m10[data-v-e73623d9]{margin:5rem 0}.p10[data-v-e73623d9]{padding:5rem 0}@media screen and (max-width:1024px){.p10[data-v-e73623d9]{padding:2rem 0}}.container[data-v-e73623d9]{margin:0 auto;max-width:174.8rem;padding:0 2rem}@media screen and (max-width:1024px){.container[data-v-e73623d9]{padding:0 1.6rem}}.logo[data-v-e73623d9]{max-height:3rem;transition:all .3s ease-in-out}.logo[data-v-e73623d9],.logo a[data-v-e73623d9]{align-items:center;display:flex;justify-content:center}.logo a[data-v-e73623d9]{height:100%;width:100%}.position-footer[data-v-e73623d9]{align-items:center;display:flex;justify-content:center;margin-top:.5rem}.position-footer.logo[data-v-e73623d9]{width:22.5rem}@media screen and (max-width:1024px){.position-footer.logo[data-v-e73623d9]{width:100%}}.position-footer.logo img[data-v-e73623d9]{height:100%;-o-object-fit:contain;object-fit:contain;width:100%}";
+export {
+  Logo_vue_vue_type_style_index_0_scoped_e73623d9_lang as default
+};
+//# sourceMappingURL=Logo-styles-1.mjs-BZPTYnVr.js.map

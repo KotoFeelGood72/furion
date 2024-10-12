@@ -50,12 +50,20 @@ import DefaultBtn from "../ui/DefaultBtn.vue";
   h3 {
     font-size: 5rem;
     margin-bottom: 4.5rem;
+    @include bp($point_2) {
+      font-size: 2.6rem;
+      margin-bottom: 2.5rem;
+    }
   }
 }
 
 .recomended_list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(33.3%, 1fr));
+  @include bp($point_2) {
+    @include flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 .recomended_item {
@@ -65,6 +73,47 @@ import DefaultBtn from "../ui/DefaultBtn.vue";
   position: relative;
   max-height: 94.7rem;
   background-color: $black;
+
+  &:nth-child(3) {
+    @include bp($point_2) {
+      order: 0;
+      max-width: 50%;
+    }
+    img {
+      @include bp($point_2) {
+        height: 20rem;
+      }
+    }
+  }
+  &:nth-child(2) {
+    img {
+      @include bp($point_2) {
+        height: 25rem;
+      }
+    }
+    @include bp($point_2) {
+      order: 1;
+      a {
+        flex-direction: column-reverse;
+        display: flex;
+      }
+    }
+  }
+  &:nth-child(1) {
+    img {
+      @include bp($point_2) {
+        height: 20rem;
+      }
+    }
+    @include bp($point_2) {
+      max-width: 50%;
+      order: 1;
+    }
+  }
+
+  @include bp($point_2) {
+    flex-direction: column;
+  }
   img {
     transition: all 0.3s ease-in-out;
   }
@@ -78,18 +127,35 @@ import DefaultBtn from "../ui/DefaultBtn.vue";
     .item__sale {
       right: 2.8rem;
       bottom: 3.5rem;
+      @include bp($point_2) {
+        top: 1.5rem;
+        bottom: auto;
+        right: 1.5rem;
+      }
     }
   }
   &:nth-child(2) {
     .item__sale {
       left: 1.9rem;
       top: 1.9rem;
+      @include bp($point_2) {
+        top: 1.5rem;
+        bottom: auto;
+        right: 1.5rem;
+        left: auto;
+      }
     }
   }
   &:nth-child(3) {
     .item__sale {
       left: 3.4rem;
       top: 2.4rem;
+      @include bp($point_2) {
+        top: 1.5rem;
+        bottom: auto;
+        right: 1.5rem;
+        left: auto;
+      }
     }
   }
   a {
@@ -136,6 +202,10 @@ import DefaultBtn from "../ui/DefaultBtn.vue";
   padding: 5.1rem 3rem;
   color: $white;
 
+  @include bp($point_2) {
+    padding: 1.5rem;
+  }
+
   :deep(.button) {
     display: inline-flex;
   }
@@ -144,16 +214,29 @@ import DefaultBtn from "../ui/DefaultBtn.vue";
     font-family: $font_2;
     display: block;
     margin-bottom: 1.6rem;
+    @include bp($point_2) {
+      margin-bottom: 0;
+      font-size: 1.2rem;
+    }
   }
 
   h3 {
     font-size: 4rem;
     margin-bottom: 1.8rem;
+    @include bp($point_2) {
+      padding: 1rem 0 0.5rem 0;
+      font-size: 2.6rem;
+      margin-bottom: 0;
+    }
   }
 
   p {
     font-size: 1.8rem;
     margin-bottom: 5rem;
+    @include bp($point_2) {
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+    }
   }
 }
 

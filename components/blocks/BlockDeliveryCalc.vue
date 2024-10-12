@@ -69,12 +69,18 @@ watch([selectedAddress], (newAddress) => {
 .delivery {
   background-color: $white;
   padding: 1.7rem 2.4rem 3.4rem 2.4rem;
+  @include bp($point_2) {
+    padding: 1.5rem;
+  }
 
   h3 {
     font-size: 3rem;
     margin-bottom: 3rem;
     font-weight: 500;
     font-family: $font_2;
+    @include bp($point_2) {
+      font-size: 2.4rem;
+    }
   }
   .delivery__address {
     max-width: 53.6rem;

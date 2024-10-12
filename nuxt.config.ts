@@ -15,7 +15,7 @@ export default defineNuxtConfig({
       },
     },
   },
-
+  plugins: ["~/plugins/vue-the-mask.js"],
   modules: [
     "@nuxt/icon",
     "nuxt-swiper",
@@ -34,32 +34,22 @@ export default defineNuxtConfig({
           async: true,
         },
       ],
-      // csp: {
-      //   reportOnly: false,
-      //   // hashAlgorithm: "sha256",
-      //   policies: {
-      //     "default-src": ["'self'"],
-      //     "script-src": [
-      //       "'self'",
-      //       "https://mc.yandex.ru",
-      //       "https://yastatic.net",
-      //       "https://pay.yandex.ru",
-      //     ],
-      //     "connect-src": [
-      //       "'self'",
-      //       "https://mc.yandex.ru",
-      //       "https://mc.yandex.com",
-      //       "https://pay.yandex.ru",
-      //     ],
-      //     "frame-src": [
-      //       "'self'",
-      //       "https://pay.yandex.ru",
-      //       "https://mc.yandex.ru",
-      //       "https://mc.yandex.com",
-      //     ],
-      //     "img-src": ["'self'", "data:", "https://mc.yandex.ru"],
-      //   },
-      // },
+      csp: {
+        reportOnly: false,
+        policies: {
+          "default-src": ["'self'"],
+          "script-src": [
+            "'self'",
+            "https://pay.yandex.ru",
+            "https://mc.yandex.ru",
+            "https://yastatic.net",
+          ],
+          "frame-src": ["'self'", "https://pay.yandex.ru"],
+          "img-src": ["'self'", "data:", "https://pay.yandex.ru"],
+          "connect-src": ["'self'", "https://pay.yandex.ru"],
+          "style-src": ["'self'", "'unsafe-inline'"],
+        },
+      },
     },
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },

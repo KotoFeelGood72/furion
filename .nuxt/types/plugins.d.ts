@@ -21,9 +21,9 @@ type NuxtAppInjections =
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/dev-server-logs.js").default> &
   InjectionType<typeof import("../../node_modules/nuxt/dist/app/plugins/check-if-layout-used.js").default> &
   InjectionType<typeof import("../../node_modules/@pinia-plugin-persistedstate/nuxt/dist/runtime/plugin.js").default> &
+  InjectionType<typeof import("../../plugins/vue-the-mask.js").default> &
   InjectionType<typeof import("../../plugins/api").default> &
-  InjectionType<typeof import("../../plugins/toast").default> &
-  InjectionType<typeof import("../../plugins/yandex-pay.client.js").default>
+  InjectionType<typeof import("../../plugins/toast").default>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }

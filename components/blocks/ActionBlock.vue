@@ -72,11 +72,21 @@ const isRent = computed(() => route.name === 'rent')
   background-color: #F0F1F5;
   position: relative;
   margin-top: 5rem;
+  .container {
+    @include bp($point_2) {
+      padding: 0;
+    }
+  }
 }
 
 .action__main {
   @include flex-start;
   min-height: 61.1rem;
+
+  @include bp($point_2) {
+    min-height: auto;
+    flex-direction: column-reverse;
+  }
 }
 
 
@@ -86,6 +96,10 @@ const isRent = computed(() => route.name === 'rent')
   position: absolute;
   right: 0;
   height: 100%;
+  @include bp($point_2) {
+    position: static;
+
+  }
   img {
     width: 100%;
     height: 100%;
@@ -94,16 +108,22 @@ const isRent = computed(() => route.name === 'rent')
 }
 
 .action_form__w {
-  
+
   max-width: 84.3rem;
+  @include bp($point_2) {
+    padding: 1.6rem 1.6rem 5rem 1.6rem;
+  }
+  
   &.small {
     max-width: 56.9rem;
-
   }
 
   h6 {
     font-size: 4rem;
     margin-bottom: 2rem;
+    @include bp($point_2) {
+      font-size: 2.6rem;
+    }
   }
 }
 
@@ -112,6 +132,10 @@ const isRent = computed(() => route.name === 'rent')
   color: $gray;
   margin-bottom: 4rem;
   max-width: 75rem;
+  @include bp($point_2) {
+    font-size: 1.4rem;
+    margin-bottom: 2.5rem;
+  }
   a {
     color: #6484D4;
   }
@@ -120,10 +144,16 @@ const isRent = computed(() => route.name === 'rent')
 .action_form__input {
   max-width: 41.5rem;
   margin-bottom: 3.1rem;
+  @include bp($point_2) {
+    margin-bottom: 2rem;
+  }
 }
 
 .action_form__btn {
   display: inline-flex;
+  @include bp($point_2) {
+    display: flex;
+  }
 }
 
 .action_txt {

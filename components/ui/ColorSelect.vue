@@ -60,6 +60,10 @@ const colorMap: Record<string, string> = {
   @include flex-start;
   margin-bottom: 3.5rem;
   gap: 2.1rem;
+  @include bp($point_2) {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
   li {
     width: 3.5rem;
     height: 3.5rem;
@@ -95,10 +99,17 @@ const colorMap: Record<string, string> = {
   font-family: $font_2;
   @include flex-start;
   gap: 0.5rem;
+  @include bp($point_2) {
+    margin-bottom: 2.5rem;
+    font-size: 1.6rem;
+  }
   span {
     color: $brown;
     font-size: 2rem;
     font-family: $font_1;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+    }
   }
 }
 </style>

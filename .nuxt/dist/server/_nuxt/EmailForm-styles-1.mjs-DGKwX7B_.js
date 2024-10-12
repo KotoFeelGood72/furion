@@ -1,0 +1,5 @@
+const EmailForm_vue_vue_type_style_index_0_scoped_b76477df_lang = ".m10[data-v-b76477df]{margin:5rem 0}.p10[data-v-b76477df]{padding:5rem 0}@media screen and (max-width:1024px){.p10[data-v-b76477df]{padding:2rem 0}}.container[data-v-b76477df]{margin:0 auto;max-width:174.8rem;padding:0 2rem}@media screen and (max-width:1024px){.container[data-v-b76477df]{padding:0 1.6rem}}.form[data-v-b76477df]{padding-top:2rem}.form>p[data-v-b76477df]{color:#616060;font-size:2rem;margin-bottom:3.5rem;max-width:44.3rem}.form_input[data-v-b76477df]{margin-bottom:2.5rem}.form_input span[data-v-b76477df]{color:#616060;display:block;font-family:Montserrat-Medium;margin-bottom:1.5rem}.form_btn[data-v-b76477df]{margin-bottom:3.5rem}.form__notice[data-v-b76477df]{color:#9e9e9e;font-size:1.4rem;max-width:44.3rem}.form__notice a[data-v-b76477df]{color:#4d7dec}.loader[data-v-b76477df]{color:#b5a596;font-size:10rem}";
+export {
+  EmailForm_vue_vue_type_style_index_0_scoped_b76477df_lang as default
+};
+//# sourceMappingURL=EmailForm-styles-1.mjs-DGKwX7B_.js.map

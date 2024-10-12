@@ -92,6 +92,7 @@
               </li>
             </ul>
           </div>
+          <!-- <YaPayBtn /> -->
           <div id="payButton"></div>
           <div class="cart_total__privacy">
             Нажимая кнопку 'Оформить заказ', Вы принимаете условия
@@ -118,7 +119,7 @@ import BlockPayment from "~/components/blocks/BlockPayment.vue";
 import { ref, computed, watch, onMounted } from "vue";
 import { useCartStoreRefs, useCartStore } from "~/store/useCartStore";
 import { useDelivery } from "~/composables/useDelivery";
-
+// import YaPayBtn from "~/components/ui/YaPayBtn.vue";
 // Получаем данные корзины и текущего заказа
 const { carts, currentOrder } = useCartStoreRefs();
 const { updateCartItem, removeCartItem, createOrder } = useCartStore();
@@ -225,6 +226,12 @@ onMounted(() => {
   gap: 16rem;
   align-items: flex-start;
   padding-bottom: 13.5rem;
+  @include bp($point_2) {
+    padding-top: 10.5rem;
+    padding-bottom: 3rem;
+    flex-direction: column;
+    gap: 3rem;
+  }
 }
 
 .cart_main__content {
@@ -232,6 +239,10 @@ onMounted(() => {
   h2 {
     font-size: 5rem;
     margin-bottom: 4rem;
+    @include bp($point_2) {
+      font-size: 3rem;
+      margin-bottom: 2.5rem;
+    }
   }
 }
 
@@ -246,27 +257,51 @@ onMounted(() => {
   @include flex-space;
   gap: 2rem;
   margin-bottom: 3.5rem;
+  @include bp($point_2) {
+    margin-bottom: 3rem;
+  }
 }
 
 .cart_total__head {
   @include flex-space;
   gap: 2rem;
   margin-bottom: 4rem;
+  @include bp($point_2) {
+    margin-bottom: 2rem;
+  }
   span,
   p {
     font-size: 4rem;
     font-family: $font_2;
+    @include bp($point_2) {
+      font-size: 2.4rem;
+    }
+  }
+
+  p {
+    @include bp($point_2) {
+      font-size: 3rem;
+    }
   }
 }
 
 .cart_total__body {
   ul {
     margin-bottom: 4.5rem;
+    @include bp($point_2) {
+      margin-bottom: 2.7rem;
+    }
   }
   li {
     @include flex-space;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+    }
     &:not(:last-child) {
       margin-bottom: 2rem;
+      @include bp($point_2) {
+        margin-bottom: 1.5rem;
+      }
     }
   }
 }
@@ -274,6 +309,10 @@ onMounted(() => {
 .cart_total__privacy {
   padding-top: 3.5rem;
   font-size: 1.6rem;
+  @include bp($point_2) {
+    font-size: 1.2rem;
+    padding-top: 2rem;
+  }
   a {
     color: $brown;
   }
@@ -345,6 +384,13 @@ onMounted(() => {
   padding: 2rem 4rem 2rem 5.1rem;
   gap: 5rem;
   position: relative;
+
+  @include bp($point_2) {
+    gap: 1rem;
+    padding: 1.5rem 3.7rem 1.5rem 1.5rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 .cart_item__img {
@@ -352,6 +398,12 @@ onMounted(() => {
   width: 23.3rem;
   height: 17.9rem;
   @include flex-center;
+
+  @include bp($point_2) {
+    min-width: 6.5rem;
+    width: 6.5rem;
+    height: 4.9rem;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -362,18 +414,32 @@ onMounted(() => {
 .cart_item__content {
   // max-width: 41.6rem;
   flex-grow: 1;
+  @include bp($point_2) {
+    max-width: calc(100% - 7.5rem);
+  }
 
   h3 {
     margin-bottom: 2rem;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
   }
 
   ul {
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
+    @include bp($point_2) {
+      gap: 0.2rem;
+    }
     li {
       @include flex-start;
       gap: 1rem;
+      @include bp($point_2) {
+        font-size: 1.4rem;
+        gap: 0.5rem;
+      }
       p {
         font-family: $font_2;
       }
@@ -389,21 +455,36 @@ onMounted(() => {
   font-size: 3rem;
   font-family: $font_2;
   margin-bottom: 3.2rem;
+  @include bp($point_2) {
+    margin-bottom: 0;
+    font-size: 2rem;
+  }
 }
 
 .cart_products__w {
   margin-bottom: 3.5rem;
+  @include bp($point_2) {
+    margin-bottom: 3rem;
+  }
 }
 
 .userInfo {
   background-color: $white;
   padding: 1.7rem 2.4rem 3.4rem 2.4rem;
+  @include bp($point_2) {
+    padding: 1.5rem;
+  }
 }
 
 .list-block {
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
+  @include bp($point_2) {
+    margin-bottom: 0;
+    gap: 3rem;
+    width: 100%;
+  }
 }
 
 .cart_select__single {
@@ -411,6 +492,14 @@ onMounted(() => {
   top: 50%;
   transform: translateY(-50%);
   left: 1.5rem;
+  @include bp($point_2) {
+    top: 1.6rem;
+    right: 1.5rem;
+    left: auto;
+    transform: translate(0);
+    // width: 100%;
+    // height: 100%;
+  }
   input {
     display: none;
     &:checked + label:after {
@@ -445,5 +534,18 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+  @include bp($point_2) {
+    gap: 1.5rem;
+  }
+}
+
+.cart_item__action {
+  @include bp($point_2) {
+    width: 100%;
+    @include flex-start;
+    gap: 3rem;
+    padding-left: 7.5rem;
+  }
 }
 </style>

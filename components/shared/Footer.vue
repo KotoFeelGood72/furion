@@ -61,6 +61,12 @@ const additionaly = ref<any>([
   @include flex-start;
   align-items: flex-start;
   padding: 10rem 0 3.6rem 0;
+
+  @include bp($point_2) {
+    padding: 3rem 0;
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
 }
 
 .footer_col__center {
@@ -69,6 +75,12 @@ const additionaly = ref<any>([
   flex-direction: column;
   align-items: flex-start;
   gap: 3.3rem;
+
+  @include bp($point_2) {
+    padding: 0;
+    order: 3;
+    gap: 2.5rem;
+  }
 
   :deep(.nav) {
     justify-content: flex-start;
@@ -82,6 +94,13 @@ const additionaly = ref<any>([
   font-size: 1.8rem;
   @include flex-start;
   gap: 3.4rem;
+
+  @include bp($point_2) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1.6rem;
+  }
   a {
     color: $brown;
   }
@@ -92,6 +111,13 @@ const additionaly = ref<any>([
   color: $gray;
   @include flex-start;
   gap: 1.9rem;
+
+  @include bp($point_2) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1.2rem;
+  }
 }
 
 .footer_col__info {
@@ -126,5 +152,10 @@ const additionaly = ref<any>([
   gap: 2.2rem;
   display: flex;
   flex-direction: column;
+
+  @include bp($point_2) {
+    // max-width: 14.7rem;
+    align-items: flex-start;
+  }
 }
 </style>

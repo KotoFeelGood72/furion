@@ -1,0 +1,5 @@
+const index_vue_vue_type_style_index_0_scoped_910ae681_lang = ".m10[data-v-910ae681]{margin:5rem 0}.p10[data-v-910ae681]{padding:5rem 0}@media screen and (max-width:1024px){.p10[data-v-910ae681]{padding:2rem 0}}.container[data-v-910ae681]{margin:0 auto;max-width:174.8rem;padding:0 2rem}@media screen and (max-width:1024px){.container[data-v-910ae681]{padding:0 1.6rem}.products_list li[data-v-910ae681]{margin-bottom:3rem}}.products_list li[data-v-910ae681]:not(:last-child){margin-bottom:10rem}@media screen and (max-width:1024px){.products_list li[data-v-910ae681]:not(:last-child){margin-bottom:6rem}}@media screen and (min-width:1024px){.products_list li[data-v-910ae681]:nth-child(2n) .products_slider{order:1}}@media screen and (min-width:1024px){.products_list li[data-v-910ae681]:nth-child(2n) .products_content{order:0}}@media screen and (max-width:1024px){.shop .container[data-v-910ae681]{padding:0}}";
+export {
+  index_vue_vue_type_style_index_0_scoped_910ae681_lang as default
+};
+//# sourceMappingURL=index-styles-1.mjs-Bf-c64ih.js.map

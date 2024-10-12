@@ -218,22 +218,37 @@ onMounted(async () => {
 <style scoped lang="scss">
 .products {
   padding-top: calc($header + 4.6rem);
+  @include bp($point_2) {
+    padding-top: 7.5rem;
+  }
 }
 
 .products_main {
   @include flex-start;
   gap: 16.5rem;
   align-items: flex-start;
+  @include bp($point_2) {
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
 .products_slider {
   max-width: 99.5rem;
   margin-bottom: 3rem;
 
+  @include bp($point_2) {
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
   :deep(.swiper-slide) {
     height: 78.4rem;
     // height: 100%;
     @include flex-center;
+    @include bp($point_2) {
+      height: 24rem;
+    }
   }
   img {
     width: 100%;
@@ -247,8 +262,15 @@ onMounted(async () => {
   flex-direction: column;
   gap: 3rem;
   margin-bottom: 5.6rem;
+  @include bp($point_2) {
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
   h3 {
     font-size: 4rem;
+    @include bp($point_2) {
+      font-size: 2.4rem;
+    }
   }
   .products_art {
     color: $brown;
@@ -259,8 +281,15 @@ onMounted(async () => {
   font-size: 4rem;
   font-family: $font_2;
   margin-bottom: 8rem;
+  @include bp($point_2) {
+    margin-bottom: 3.5rem;
+    font-size: 2.2rem;
+  }
   p {
     margin-bottom: 7rem;
+    @include bp($point_2) {
+      margin-bottom: 3rem;
+    }
   }
 }
 
@@ -268,16 +297,25 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @include bp($point_2) {
+    gap: 1.5rem;
+  }
   li {
     &:first-child {
       border-bottom: 0.1rem solid #d5d5d5;
       padding-bottom: 2rem;
+      @include bp($point_2) {
+        padding-bottom: 1.5rem;
+      }
     }
     a {
       @include flex-space;
       color: $brown;
       font-size: 2.4rem;
       font-family: $font_2;
+      @include bp($point_2) {
+        font-size: 1.6rem;
+      }
     }
   }
 }
@@ -285,6 +323,10 @@ onMounted(async () => {
 .products_navigation {
   @include flex-space;
   margin-top: 3rem;
+
+  @include bp($point_2) {
+    display: none;
+  }
 
   .products_prev,
   .products_next {

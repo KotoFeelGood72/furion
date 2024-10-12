@@ -820,7 +820,7 @@ function getRouteRulesForPath(path) {
 
 const rootDir = "C:/Users/studi/Desktop/furion";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[{"src":"https://pay.yandex.ru/sdk/v1/pay.js","async":true}],"noscript":[],"charset":"utf-8","viewport":"width=device-width, initial-scale=1"};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[{"src":"https://pay.yandex.ru/sdk/v1/pay.js","async":true}],"noscript":[],"charset":"utf-8","viewport":"width=device-width, initial-scale=1","csp":{"reportOnly":false,"policies":{"default-src":["'self'"],"script-src":["'self'","https://pay.yandex.ru","https://mc.yandex.ru","https://yastatic.net"],"frame-src":["'self'","https://pay.yandex.ru"],"img-src":["'self'","data:","https://pay.yandex.ru"],"connect-src":["'self'","https://pay.yandex.ru"],"style-src":["'self'","'unsafe-inline'"]}}};
 
 const appRootTag = "div";
 

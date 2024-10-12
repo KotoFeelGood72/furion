@@ -16,13 +16,13 @@
       <InputPhone placeholder="Ваш телефон" v-model="formData.phone" />
       <Divider :height="2" />
       <DefaultBtn
-        name="Войти или зарегистрироваться"
+        name="Отправить"
         type="secondary"
         color="black"
         size="normal"
+        @click="submitForm"
       />
     </div>
-    <!-- <div class="callback_main"></div> -->
   </div>
 </template>
 
@@ -35,10 +35,11 @@ import { useModalStore } from "~/store/useModalStore";
 import { useRouter } from "vue-router";
 import DefaultBtn from "../ui/DefaultBtn.vue";
 import Divider from "../ui/Divider.vue";
+import { useTelegramBot } from "~/composables/useTelegramBot";
 
-import axios from "axios";
+// Используем composable для отправки данных в Telegram
+const { sendMessage } = useTelegramBot();
 
-// Флаги для отображения разных форм
 const formData = ref<any>({
   name: "",
   phone: "",
@@ -46,6 +47,21 @@ const formData = ref<any>({
 
 const { closeModal } = useModalStore();
 const router = useRouter();
+
+const submitForm = async () => {
+  if (formData.value.name && formData.value.phone) {
+    const message = `Новая заявка:\nИмя: ${formData.value.name}\nТелефон: ${formData.value.phone}`;
+    const response = await sendMessage(message);
+    if (response.success) {
+      alert("Заявка успешно отправлена!");
+      closeModal("callback");
+    } else {
+      alert("Ошибка при отправке заявки.");
+    }
+  } else {
+    alert("Пожалуйста, заполните все поля.");
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -62,10 +78,6 @@ const router = useRouter();
 
 .callback__form {
   position: relative;
-  // min-height: 50rem;
-  // display: flex;
-  // flex-direction: column;
-  // gap: 1rem;
 
   :deep(input) {
     height: 6.1rem;

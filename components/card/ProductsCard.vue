@@ -5,6 +5,24 @@
         :slides-per-view="1"
         :space-between="20"
         :modules="[Navigation, Pagination]"
+        :breakpoints="{
+          320: {
+            slidesPerView: 1.2,
+            spaceBetween: 10,
+            slidesOffsetBefore: 10,
+            slidesOffsetAfter: 10,
+          },
+          768: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            slidesOffsetBefore: 10,
+            slidesOffsetAfter: 10,
+          },
+          1024: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+        }"
         :navigation="{
           prevEl: `.products_prev_${products.id}`,
           nextEl: `.products_next_${products.id}`,
@@ -178,14 +196,25 @@ const updateQuantity = (quantity: number) => {
 .products {
   @include flex-start;
   gap: 16.5rem;
+
+  @include bp($point_2) {
+    flex-direction: column;
+    gap: 1.8rem;
+  }
 }
 
 .products_slider {
   max-width: 74.5rem;
   position: relative;
+  @include bp($point_2) {
+    max-width: 100%;
+  }
 
   :deep(.swiper) {
     height: 60.5rem;
+    @include bp($point_2) {
+      height: 22.3rem;
+    }
   }
 
   .swiper-slide {
@@ -205,6 +234,10 @@ const updateQuantity = (quantity: number) => {
   @include flex-space;
   margin-top: 3rem;
 
+  @include bp($point_2) {
+    display: none;
+  }
+
   div {
     cursor: pointer;
     @include flex-center;
@@ -222,11 +255,25 @@ const updateQuantity = (quantity: number) => {
   padding-left: 0.5rem;
 }
 
+.products_content {
+  @include bp($point_2) {
+    max-width: 100%;
+    padding: 0 1.6rem;
+  }
+}
+
 .products_content__head {
   margin-bottom: 8rem;
+  @include bp($point_2) {
+    margin-bottom: 3.5rem;
+  }
   h3 {
     font-size: 4rem;
     margin-bottom: 3rem;
+    @include bp($point_2) {
+      font-size: 2.4rem;
+      margin-bottom: 1.5rem;
+    }
   }
 
   a {
@@ -236,6 +283,10 @@ const updateQuantity = (quantity: number) => {
     text-decoration: underline;
     text-underline-position: under;
     display: inline-flex;
+
+    @include bp($point_2) {
+      font-size: 2rem;
+    }
     &:hover {
       text-decoration: none;
     }
@@ -245,12 +296,21 @@ const updateQuantity = (quantity: number) => {
 .products_description {
   margin-bottom: 3.5rem;
   color: $gray;
+
+  @include bp($point_2) {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .products_color_select {
   @include flex-start;
   margin-bottom: 3.5rem;
   gap: 2.1rem;
+  @include bp($point_2) {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
   li {
     width: 3.5rem;
     height: 3.5rem;
@@ -286,24 +346,43 @@ const updateQuantity = (quantity: number) => {
   font-family: $font_2;
   @include flex-start;
   gap: 0.5rem;
+  @include bp($point_2) {
+    font-size: 1.6rem;
+    margin-bottom: 3rem;
+  }
   span {
     color: $brown;
     font-size: 2rem;
     font-family: $font_1;
+    @include bp($point_2) {
+      font-size: 1.6rem;
+    }
   }
 }
 
 .products_prices {
   @include flex-start;
   gap: 10rem;
+  @include bp($point_2) {
+    flex-direction: column;
+    gap: 3rem;
+    align-items: flex-start;
+  }
   p {
     font-size: 4rem;
     font-family: $font_2;
+    @include bp($point_2) {
+    }
   }
 }
 
 .products_prices__right {
   @include flex-end;
   gap: 3.1rem;
+  @include bp($point_2) {
+    width: 100%;
+    // flex-direction: column;
+    // align-items: flex-start;
+  }
 }
 </style>

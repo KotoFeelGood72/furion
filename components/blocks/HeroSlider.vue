@@ -3,9 +3,8 @@
     <div class="container">
       <Swiper
         :slides-per-view="1"
-        :modules="[Navigation, Pagination, EffectFade]"
+        :modules="[Navigation, Pagination]"
         :speed="700"
-        :effect="'fade'"
         :navigation="{
           prevEl: '.hero_prev',
           nextEl: '.hero_next',
@@ -79,16 +78,30 @@ defineProps<{
   width: 100%;
   padding-left: 14.5rem;
   z-index: -1;
+  position: relative;
+
+  @include bp($point_2) {
+    padding: 4rem 0 0 1.6rem;
+  }
 
   .hero_slide__content {
     max-width: 78.9rem;
-    // padding: 0 0 19.6rem 0;
+    @include bp($point_2) {
+      max-width: 100%;
+      z-index: 1;
+      position: relative;
+      padding-bottom: 7rem;
+    }
 
     & > p {
       font-size: 3rem;
       color: $brown;
       font-family: $font_2;
       margin-bottom: 2.5rem;
+      @include bp($point_2) {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
     }
 
     h1 {
@@ -96,7 +109,12 @@ defineProps<{
       line-height: 120%;
       margin-bottom: 2rem;
       margin-right: -7rem;
-      //   margin-right: -15rem;
+      @include bp($point_2) {
+        font-size: 3rem;
+        margin-right: 0;
+        max-width: 26.1rem;
+        margin-bottom: 26.3rem;
+      }
     }
 
     span {
@@ -104,11 +122,24 @@ defineProps<{
       color: $gray;
       margin-bottom: 5.2rem;
       display: block;
+      @include bp($point_2) {
+        font-size: 1.6rem;
+        margin-bottom: 3rem;
+        max-width: 80%;
+      }
     }
   }
 
   .hero_slide__img {
     min-width: 84.9rem;
+
+    @include bp($point_2) {
+      min-width: 120%;
+      position: absolute;
+      top: 5%;
+      z-index: 0;
+      right: -10%;
+    }
 
     img {
       @include flex-center;
@@ -122,6 +153,11 @@ defineProps<{
   display: inline-flex;
   position: relative;
   z-index: 99;
+
+  @include bp($point_2) {
+    padding: 0 1.6rem 0 0;
+    display: flex;
+  }
 }
 
 .hero_navigation {
@@ -148,26 +184,29 @@ defineProps<{
   }
 }
 
-.swiper-slide {
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-  &-active {
-    opacity: 1;
-  }
-}
+// .swiper-slide {
+//   opacity: 0;
+//   transition: all 0.3s ease-in-out;
+//   &-active {
+//     opacity: 1;
+//   }
+// }
 
 .hero_slide__content,
 .hero_slide__img {
-  opacity: 0;
-  transform: translateX(-5rem);
+  // opacity: 0;
+  // transform: translateX(-5rem);
   transition: all 0.7s ease;
+  @include bp($point_2) {
+    // transform: translateX(0);
+  }
 }
 
-.swiper-slide-active .hero_slide__content,
-.swiper-slide-active .hero_slide__img {
-  opacity: 1;
-  transform: translateX(0);
-}
+// .swiper-slide-active .hero_slide__content,
+// .swiper-slide-active .hero_slide__img {
+//   opacity: 1;
+//   transform: translateX(0);
+// }
 
 .hero-pagination {
   position: absolute;
@@ -177,6 +216,9 @@ defineProps<{
   z-index: 22;
   @include flex-center;
   gap: 3rem;
+  @include bp($point_2) {
+    bottom: 3rem;
+  }
 }
 
 :deep(.swiper-pagination-bullet) {
@@ -195,7 +237,13 @@ defineProps<{
 
 .hero_slider * {
   z-index: 0;
-  transition: none !important;
+  // transition: none !important;
+
+  &.container {
+    @include bp($point_2) {
+      padding: 0;
+    }
+  }
 }
 
 .hero__link {
@@ -203,5 +251,8 @@ defineProps<{
 }
 .hero_navigation {
   pointer-events: none;
+  @include bp($point_2) {
+    display: none;
+  }
 }
 </style>
